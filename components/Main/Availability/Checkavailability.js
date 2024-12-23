@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { checkParticipantAvailableSlots } from "@/helpers/commonhelper";
+import { checkParticipantAvailableSlots, formatDate } from "@/helpers/commonhelper";
 import Availableslot from "../Availableslots/Availableslot";
 
 const CheckAvailability = ({ participants, participantAvailability, schedules }) => {
+
     const [selectedParticipants, setSelectedParticipants] = useState([]);
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
@@ -22,8 +22,8 @@ const CheckAvailability = ({ participants, participantAvailability, schedules })
         const input = {
             participant_ids: selectedParticipants.map((p) => p.id),
             date_range: {
-                start: startDate,
-                end: endDate,
+                start: formatDate(startDate),
+                end: formatDate(endDate),
             },
         };
 
@@ -33,7 +33,6 @@ const CheckAvailability = ({ participants, participantAvailability, schedules })
         }
 
         const result = checkParticipantAvailableSlots(input, participants, participantAvailability, schedules);
-
         if (result.success) {
             console.log("Overlapping Slots:", result.data);
             setAvailableSlots(result.data)
@@ -131,7 +130,7 @@ const CheckAvailability = ({ participants, participantAvailability, schedules })
                 </div>
             </div>
             <div className="mt-3">
-            <Availableslot availableSlots={availableSlots} />
+                <Availableslot availableSlots={availableSlots} />
             </div>
         </>
     );

@@ -14,7 +14,6 @@ async function page() {
             <div className="card p-4 shadow-sm mx-auto" style={{width:"700px"}}>
             <h3 className="text-center fw-bold p-3">Check Availability</h3>
             <Checkavailability participants={participants} participantAvailability={participantAvailability} schedules={schedules} />
-        
             </div>
             </div>
         </>
